@@ -3,7 +3,7 @@ resource "aws_security_group" "allow_all" {
   count       = "${true == "" ? 1 : 0}"
   name        = "instance_sg"
   description = "Allow all inbound traffic for security group"
-  vpc_id      = "vpc-0a9a2e553fb009324"
+  vpc_id      = "***vpc-id****"
 
   ingress {
     from_port   = 0
@@ -25,17 +25,17 @@ resource "aws_security_group" "allow_all" {
 
 # resource "aws_key_pair" "example" {
 #   key_name   = "terraform"
-#   #public_key = file("/home/gajanan/.ssh/id_rsa.pub")
-# public_key = file("~/.ssh/id_rsa.pub")
+#   #public_key = file("**** id_rsa.pub location *****")
+# public_key = file("**** id_rsa.pub location *****")
 # }
 
 
 resource "aws_instance" "Demo" {
-  ami = "ami-0597375488017747e"
+  ami = "**** ami *****"
   instance_type = "t2.micro"
-  key_name = "terraform"
-  #security_groups = ["sg-015bab7cc29ea3764"]
-  vpc_security_group_ids = [ "sg-0a45be99eefb9415f" ]
+  key_name = "**** key name without .pem *****"
+  #security_groups = ["**** sg group id *****"]
+  vpc_security_group_ids = [ "**** sg group id *****" ]
   tags = {
     Name = "terraform"
   }
@@ -45,8 +45,8 @@ resource "aws_instance" "Demo" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
-    private_key = "${file("/home/gajanan/Downloads/terraform.pem")}"
-    #private_key = file("~/.ssh/id_rsa")
+    private_key = "${file("**** .pem location *****")}"
+    
     host        = self.public_ip
   }
 
